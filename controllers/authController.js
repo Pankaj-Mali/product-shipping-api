@@ -23,7 +23,7 @@ const googleAuth = (req, res) => {
   passport.authenticate('google', { scope: ['profile', 'email'] })(req, res);
 };
 
-const googleAuthCallback = (req, res) => {
+const googleAuthCallback = (req, res,next) => {
   passport.authenticate('google', (err, user) => {
     if (err) {
       return res.redirect('/auth/failure');
@@ -31,8 +31,8 @@ const googleAuthCallback = (req, res) => {
     const token = jwt.sign({ id: user.id }, jwtSecret, {
       expiresIn: '30d',
     });
-    res.redirect(`/auth/success?token=${token}`);
-  })(req, res);
+    res = {user, local: token}
+  })(req, res, next());
 };
 
 module.exports = {
