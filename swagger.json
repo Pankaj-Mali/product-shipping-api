@@ -1,43 +1,27 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-      "title": "Supply Chain Management API",
-      "version": "1.0.0",
-      "description": "API documentation for the Supply Chain Management system"
-    },
-    "servers": [
-      {
-        "url": "http://localhost:5000/api"
-      }
-    ],
-    "paths": {
-      "/customers": {
-        "get": {
-          "summary": "List all customers",
-          "responses": {
-            "200": {
-              "description": "A list of customers",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Customer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new customer",
-          "responses": {
-            "201": {
-              "description": "The created customer",
-              "content": {
-                "application/json": {
-                  "schema": {
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Supply Chain Management API",
+    "version": "1.0.0",
+    "description": "API documentation for the Supply Chain Management system"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api"
+    }
+  ],
+  "paths": {
+    "/customers": {
+      "get": {
+        "summary": "List all customers",
+        "responses": {
+          "200": {
+            "description": "A list of customers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
                     "$ref": "#/components/schemas/Customer"
                   }
                 }
@@ -46,549 +30,692 @@
           }
         }
       },
-      "/customers/{customer_id}": {
-        "get": {
-          "summary": "Retrieve a customer by ID",
-          "responses": {
-            "200": {
-              "description": "The customer with the specified ID",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Customer"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Customer not found"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update a customer by ID",
-          "responses": {
-            "200": {
-              "description": "The updated customer",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Customer"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Customer not found"
-            }
-          }
-        },
-        "delete": {
-          "summary": "Delete a customer by ID",
-          "responses": {
-            "204": {
-              "description": "Customer deleted"
-            },
-            "404": {
-              "description": "Customer not found"
-            }
-          }
-        }
-      },
-      "/orders": {
-        "get": {
-          "summary": "List all orders",
-          "responses": {
-            "200": {
-              "description": "A list of orders",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Order"
-                    }
-                  }
-                }
+      "post": {
+        "summary": "Create a new customer",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
               }
             }
           }
         },
-        "post": {
-          "summary": "Create a new order",
-          "responses": {
-            "201": {
-              "description": "The created order",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Order"
-                  }
+        "responses": {
+          "201": {
+            "description": "The created customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
                 }
               }
-            }
-          }
-        }
-      },
-      "/orders/{order_id}": {
-        "get": {
-          "summary": "Retrieve an order by ID",
-          "responses": {
-            "200": {
-              "description": "The order with the specified ID",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Order"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Order not found"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update an order by ID",
-          "responses": {
-            "200": {
-              "description": "The updated order",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Order"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Order not found"
-            }
-          }
-        },
-        "delete": {
-          "summary": "Delete an order by ID",
-          "responses": {
-            "204": {
-              "description": "Order deleted"
-            },
-            "404": {
-              "description": "Order not found"
-            }
-          }
-        },
-        "patch": {
-          "summary": "Update order status",
-          "responses": {
-            "200": {
-              "description": "The updated order status",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Order"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Order not found"
-            }
-          }
-        }
-      },
-      "/orders/{order_id}/items": {
-        "get": {
-          "summary": "Retrieve order items",
-          "responses": {
-            "200": {
-              "description": "A list of order items",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/OrderItem"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/products": {
-        "get": {
-          "summary": "List all products",
-          "responses": {
-            "200": {
-              "description": "A list of products",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Product"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new product",
-          "responses": {
-            "201": {
-              "description": "The created product",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/products/{product_id}": {
-        "get": {
-          "summary": "Retrieve a product by ID",
-          "responses": {
-            "200": {
-              "description": "The product with the specified ID",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Product not found"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update a product by ID",
-          "responses": {
-            "200": {
-              "description": "The updated product",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Product not found"
-            }
-          }
-        },
-        "delete": {
-          "summary": "Delete a product by ID",
-          "responses": {
-            "204": {
-              "description": "Product deleted"
-            },
-            "404": {
-              "description": "Product not found"
-            }
-          }
-        }
-      },
-      "/shipments": {
-        "get": {
-          "summary": "List all shipments",
-          "responses": {
-            "200": {
-              "description": "A list of shipments",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Shipment"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new shipment",
-          "responses": {
-            "201": {
-              "description": "The created shipment",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Shipment"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/shipments/{shipment_id}": {
-        "get": {
-          "summary": "Retrieve a shipment by ID",
-          "responses": {
-            "200": {
-              "description": "The shipment with the specified ID",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Shipment"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Shipment not found"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update a shipment by ID",
-          "responses": {
-            "200": {
-              "description": "The updated shipment",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Shipment"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Shipment not found"
-            }
-          }
-        },
-        "delete": {
-          "summary": "Delete a shipment by ID",
-          "responses": {
-            "204": {
-              "description": "Shipment deleted"
-            },
-            "404": {
-              "description": "Shipment not found"
-            }
-          }
-        }
-      },
-      "/suppliers": {
-        "get": {
-          "summary": "List all suppliers",
-          "responses": {
-            "200": {
-              "description": "A list of suppliers",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Supplier"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "post": {
-          "summary": "Create a new supplier",
-          "responses": {
-            "201": {
-              "description": "The created supplier",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Supplier"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/suppliers/{supplier_id}": {
-        "get": {
-          "summary": "Retrieve a supplier by ID",
-          "responses": {
-            "200": {
-              "description": "The supplier with the specified ID",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Supplier"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Supplier not found"
-            }
-          }
-        },
-        "put": {
-          "summary": "Update a supplier by ID",
-          "responses": {
-            "200": {
-              "description": "The updated supplier",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/Supplier"
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Supplier not found"
-            }
-          }
-        },
-        "delete": {
-          "summary": "Delete a supplier by ID",
-          "responses": {
-            "204": {
-              "description": "Supplier deleted"
-            },
-            "404": {
-              "description": "Supplier not found"
             }
           }
         }
       }
     },
-    "components": {
-      "schemas": {
-        "Customer": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "name": {
-              "type": "string",
-              "example": "John Doe"
-            },
-            "email": {
-              "type": "string",
-              "example": "john@example.com"
+    "/customers/{customer_id}": {
+      "get": {
+        "summary": "Retrieve a customer by ID",
+        "responses": {
+          "200": {
+            "description": "The customer with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a customer by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Customer"
+              }
             }
           }
         },
-        "Order": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "customer_id": {
-              "type": "integer",
-              "example": 1
-            },
-            "status": {
-              "type": "string",
-              "example": "Pending"
-            },
-            "order_date": {
-              "type": "string",
-              "format": "date-time",
-              "example": "2023-07-14T08:00:00Z"
+        "responses": {
+          "200": {
+            "description": "The updated customer",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Customer not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a customer by ID",
+        "responses": {
+          "204": {
+            "description": "Customer deleted"
+          },
+          "404": {
+            "description": "Customer not found"
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "List all orders",
+        "responses": {
+          "200": {
+            "description": "A list of orders",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Order"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
             }
           }
         },
-        "OrderItem": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "order_id": {
-              "type": "integer",
-              "example": 1
-            },
-            "product_id": {
-              "type": "integer",
-              "example": 1
-            },
-            "quantity": {
-              "type": "integer",
-              "example": 2
+        "responses": {
+          "201": {
+            "description": "The created order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{order_id}": {
+      "get": {
+        "summary": "Retrieve an order by ID",
+        "responses": {
+          "200": {
+            "description": "The order with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update an order by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
             }
           }
         },
-        "Product": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "name": {
-              "type": "string",
-              "example": "Product A"
-            },
-            "price": {
-              "type": "number",
-              "example": 100.5
-            },
-            "stock": {
-              "type": "integer",
-              "example": 50
+        "responses": {
+          "200": {
+            "description": "The updated order",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an order by ID",
+        "responses": {
+          "204": {
+            "description": "Order deleted"
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update order status",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
             }
           }
         },
-        "Shipment": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "order_id": {
-              "type": "integer",
-              "example": 1
-            },
-            "shipment_date": {
-              "type": "string",
-              "format": "date-time",
-              "example": "2023-07-15T08:00:00Z"
+        "responses": {
+          "200": {
+            "description": "The updated order status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Order"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Order not found"
+          }
+        }
+      }
+    },
+    "/orders/{order_id}/items": {
+      "get": {
+        "summary": "Retrieve order items",
+        "responses": {
+          "200": {
+            "description": "A list of order items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/OrderItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products": {
+      "get": {
+        "summary": "List all products",
+        "responses": {
+          "200": {
+            "description": "A list of products",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
             }
           }
         },
-        "Supplier": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "integer",
-              "example": 1
-            },
-            "name": {
-              "type": "string",
-              "example": "Supplier A"
-            },
-            "contact_info": {
-              "type": "string",
-              "example": "supplier@example.com"
+        "responses": {
+          "201": {
+            "description": "The created product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
             }
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "summary": "Retrieve a product by ID",
+        "responses": {
+          "200": {
+            "description": "The product with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a product by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a product by ID",
+        "responses": {
+          "204": {
+            "description": "Product deleted"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/shipments": {
+      "get": {
+        "summary": "List all shipments",
+        "responses": {
+          "200": {
+            "description": "A list of shipments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Shipment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new shipment",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Shipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created shipment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shipment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/shipments/{shipment_id}": {
+      "get": {
+        "summary": "Retrieve a shipment by ID",
+        "responses": {
+          "200": {
+            "description": "The shipment with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shipment"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shipment not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a shipment by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Shipment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated shipment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shipment"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shipment not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a shipment by ID",
+        "responses": {
+          "204": {
+            "description": "Shipment deleted"
+          },
+          "404": {
+            "description": "Shipment not found"
+          }
+        }
+      }
+    },
+    "/suppliers": {
+      "get": {
+        "summary": "List all suppliers",
+        "responses": {
+          "200": {
+            "description": "A list of suppliers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Supplier"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new supplier",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Supplier"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created supplier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Supplier"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/suppliers/{supplier_id}": {
+      "get": {
+        "summary": "Retrieve a supplier by ID",
+        "responses": {
+          "200": {
+            "description": "The supplier with the specified ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Supplier"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Supplier not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a supplier by ID",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Supplier"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The updated supplier",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Supplier"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Supplier not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a supplier by ID",
+        "responses": {
+          "204": {
+            "description": "Supplier deleted"
+          },
+          "404": {
+            "description": "Supplier not found"
           }
         }
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int"
+          },
+          "name": {
+            "type": "string"
+          },
+          "contact_info": {
+            "type": "string"
+          }
+         
+        },
+        "required": ["name", "contact_info"]
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "itn"
+          },
+          "customer_id": {
+            "type": "string",
+            "format": "int"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "shipped", "delivered", "cancelled"]
+          },
+          "order_date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["customer_id", "status", "items"]
+      },
+      "OrderItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "itn"
+          },
+          "order_id": {
+            "type": "string",
+            "format": "int"
+          },
+          "product_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "quantity": {
+            "type": "integer"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "required": ["product_id", "quantity", "price", "order_id"]
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "supplier_id": {
+            "type": "string",
+            "format": "int"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number",
+            "format": "float"
+          },
+          "stock": {
+            "type": "integer"
+          }
+        },
+        "required": ["name", "price", "stock","supplier_id"]
+      },
+      "Shipment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "shipment_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "delivery_date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "shipped", "delivered", "cancelled"]
+          }
+        },
+        "required": ["order_id", "shipment_date", "status"]
+      },
+      "Supplier": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "contact_info": {
+            "type": "string"
+          }
+         
+        },
+        "required": ["name", "contact_info"]
+      }
+    }
   }
-  
+}
